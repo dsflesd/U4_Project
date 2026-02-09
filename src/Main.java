@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        int numOfLines=0;
         String fileData = "";
         try {
             File f = new File("src/data");
@@ -13,11 +14,11 @@ public class Main {
             while (s.hasNextLine()) {
                 String line = s.nextLine();
                 fileData += line + "\n";
+                numOfLines++;
             }
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
         }
-
         String[] lines = fileData.split("\n");
         int fiveOfAKind = 0;
         int fourOfAKind = 0;
@@ -26,22 +27,20 @@ public class Main {
         int doublePair = 0;
         int singlePair = 0;
         int highCard = 0;
-        int numOfLines=0;
+        Hand[] poker;
+        poker=new Hand[numOfLines];
         for (String line : lines) {
-            HandType hand =new HandType();
-            numOfLines++;
             String[] numbers = line.split(",");
             String numberSplit = Arrays.toString(numbers);
             int barValue = numberSplit.indexOf("|");
-            String bids = numberSplit.substring(barValue+1);
-            if (bids.length()==4) {
-                bids = bids.substring(0, 3);
+            int bid=0;
+            String bidValue= numberSplit.substring(barValue+1);
+            if (bidValue.length()==3){
+                bid =Integer.parseInt(numberSplit.substring(barValue+1, barValue+3));
             }
-            else if (bids.length()==3){
-                bids = bids.substring(0,2);
+            if (bidValue.length()==4){
+                bid =Integer.parseInt(numberSplit.substring(barValue+1, barValue+4));
             }
-            int bidValue =Integer.parseInt(bids);
-
             numberSplit = numberSplit.substring(1, barValue);
             String[] cards = numberSplit.split(", ");
 
@@ -60,6 +59,14 @@ public class Main {
                 }
 
             }
+
+            for (int i=0; i<lines.length-1; i++){
+                Hand firstHand=new Hand(3, bid,25);
+                poker[i]=firstHand;
+                Hand secondHand= new Hand(4,bid,17);
+                poker[i+1]= secondHand;
+            }
+
             int count = 0;
             for (String checker : cards) {
                 for (String x:cards) {
@@ -89,15 +96,17 @@ public class Main {
             if (count == 5) {
                 highCard++;
             }
-
+            System.out.println(Arrays.toString(poker));
+//            firstHand.determineHandType(count);
+//            firstHand.determineRank(numOfLines);
+//            System.out.println(firstHand.toString());
         }
-        System.out.println("Five of a kind:" +fiveOfAKind);
-        System.out.println("Four of a kind: "+fourOfAKind);
-        System.out.println("Full House: "+fullHouse);
-        System.out.println("Three of a kind: "+threeOfAKind);
-        System.out.println("Double Pair: "+ doublePair);
-        System.out.println("Single Pair: "+singlePair);
-        System.out.println("High Card: "+highCard);
-        System.out.println(numOfLines);
+//        System.out.println("Five of a kind:" +fiveOfAKind);
+//        System.out.println("Four of a kind: "+fourOfAKind);
+//        System.out.println("Full House: "+fullHouse);
+//        System.out.println("Three of a kind: "+threeOfAKind);
+//        System.out.println("Double Pair: "+ doublePair);
+//        System.out.println("Single Pair: "+singlePair);
+//        System.out.println("High Card: "+highCard);
     }
 }
