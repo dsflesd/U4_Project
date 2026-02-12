@@ -1,13 +1,17 @@
+
 public class Hand {
-    private int rank;
+    public int rank;
     private int bidValue;
     private int handType;
-    public Hand (int rank, int bidValue, int count) {
-        this.rank = rank;
+    private int firstCard;
+    private int secondCard;
+    private int thirdCard;
+    private int fourthCard;
+    private int fifthCard;
+    public Hand ( int bidValue, int count,int firstCard) {
+
         this.bidValue =bidValue;
         this.handType=determineHandType(count);
-
-
     }
     public String toString(){
         return "Rank:"+rank+" Bid Value:"+bidValue+" Hand Type:"+handType;
@@ -36,7 +40,15 @@ public class Hand {
         }
         return handType;
     }
+    public int returnHandType(){
+        return handType;
+    }
+    //    public void setRank()){
+//        rank=highestNumber;
+//    }
     public void determineRank(int highestRank){
         rank=highestRank;
     }
 }
+
+
