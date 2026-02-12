@@ -89,7 +89,11 @@ public class Main {
             }
             Hand firstHand = new Hand(bid, count,5);
             poker[i] = firstHand;
-
+            System.out.println(Arrays.toString(cards));
+        for(int x=0; x<cards.length; x++){
+            poker[x].setFirstCard(Integer.parseInt(cards[x]));
+            poker[x].setSecondCard(Integer.parseInt(cards[x]));
+        }
 
         }
         System.out.println(Arrays.toString(poker));
