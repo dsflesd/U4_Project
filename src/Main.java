@@ -26,6 +26,7 @@ public class Main {
         int doublePair = 0;
         int singlePair = 0;
         int highCard = 0;
+        int totalBid=0;
         Hand[] poker;
         poker = new Hand[numOfLines];
         for (int i = 0; i < lines.length; i++) {
@@ -37,7 +38,6 @@ public class Main {
             if (bidValue.length() == 3) {
                 bid = Integer.parseInt(numberSplit.substring(barValue + 1, barValue + 3));
             }
-
             if (bidValue.length() == 4) {
                 bid = Integer.parseInt(numberSplit.substring(barValue + 1, barValue + 4));
             }
@@ -87,126 +87,53 @@ public class Main {
             if (count == 5) {
                 highCard++;
             }
-            Hand firstHand = new Hand(bid, count,5);
+            Hand firstHand = new Hand(bid, count,Integer.parseInt(cards[0]), Integer.parseInt(cards[1]), Integer.parseInt(cards[2]),Integer.parseInt(cards[3]),Integer.parseInt(cards[4]));
             poker[i] = firstHand;
-            System.out.println(Arrays.toString(cards));
-        for(int x=0; x<cards.length; x++){
-            poker[x].setFirstCard(Integer.parseInt(cards[x]));
-            poker[x].setSecondCard(Integer.parseInt(cards[x]));
         }
-
+        for (int i=0; i<poker.length;i++) {
+            int rank = 1;
+            for (int x = 0; x < poker.length; x++) {
+                boolean isStronger = false;
+                if (poker[i].returnHandType() > poker[x].returnHandType()) {
+                    isStronger = true;
+                } else if (poker[i].returnHandType() == poker[x].returnHandType()) {
+                    if (poker[i].returnFirstCard() > poker[x].returnFirstCard()) {
+                        isStronger = true;
+                    } else if (poker[i].returnFirstCard() == poker[x].returnFirstCard()) {
+                        if (poker[i].returnSecondCard() > poker[x].returnSecondCard()) {
+                            isStronger = true;
+                        } else if (poker[i].returnSecondCard() == poker[x].returnSecondCard()) {
+                            if (poker[i].returnThirdCard() > poker[x].returnThirdCard()) {
+                                isStronger = true;
+                            } else if (poker[i].returnThirdCard() == poker[x].returnThirdCard()) {
+                                if (poker[i].returnFourthCard() > poker[x].returnFourthCard()) {
+                                    isStronger = true;
+                                } else if (poker[i].returnFourthCard() == poker[x].returnFourthCard()) {
+                                    if (poker[i].returnFifthCard() > poker[x].returnFifthCard()) {
+                                        isStronger = true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }if (isStronger){
+                    rank++;
+                }
+            }
+            poker[i].setRank(rank);
         }
         System.out.println(Arrays.toString(poker));
-//        int handTypeOneCount = 0;
-//        int handTypeTwoCount = 0;
-//        int handTypeThreeCount = 0;
-//        int handTypeFourCount = 0;
-//        int handTypeFiveCount = 0;
-//        int handTypeSixCount = 0;
-//        int handTypeSevenCount = 0;
-//        for (Hand hands : poker) {
-//            if (hands.returnHandType() == 1) {
-//                handTypeOneCount++;
-//            }
-//            if (hands.returnHandType() == 2) {
-//                handTypeTwoCount++;
-//            }
-//            if (hands.returnHandType() == 3) {
-//                handTypeThreeCount++;
-//            }
-//            if (hands.returnHandType() == 4) {
-//                handTypeFourCount++;
-//            }
-//            if (hands.returnHandType() == 5) {
-//                handTypeFiveCount++;
-//            }
-//            if (hands.returnHandType() == 6) {
-//                handTypeSixCount++;
-//            }
-//            if (hands.returnHandType() == 7) {
-//                handTypeSevenCount++;
-//            }
-//        }
-//        Hand[] poker1;
-//        poker1 = new Hand[handTypeOneCount];
-//        Hand[] poker2;
-//        poker2 = new Hand[handTypeTwoCount];
-//        Hand[] poker3;
-//        poker3 = new Hand[handTypeThreeCount];
-//        Hand[] poker4;
-//        poker4 = new Hand[handTypeFourCount];
-//        Hand[] poker5;
-//        poker5 = new Hand[handTypeFiveCount];
-//        Hand[] poker6;
-//        poker6 = new Hand[handTypeSixCount];
-//        Hand[] poker7;
-//        poker7 = new Hand[handTypeSevenCount];
-//        for (Hand hand : poker) {
-//            for (int i = 0; i < poker1.length; i++) {
-//                if (hand.returnHandType() == 1) {
-//                    poker1[i] = hand;
-//                }
-//            }
-//            for (int i = 0; i < poker1.length; i++) {
-//                if (poker[i].returnHandType() == 2) {
-//                    poker2[i] = poker[i];
-//                }
-//            }
-//            for (int i = 0; i < poker3.length; i++) {
-//                if ((hand.returnHandType() == 3) && (!(hand.equals(poker3[i])))) {
-//                    poker3[i] = hand;
-//                }
-//                if (hand.returnHandType() == 3) {
-//                    poker3[i] = hand;
-//                }
-//            }
-//            for (int i = 0; i < poker4.length; i++) {
-//                if (poker[i].returnHandType() == 4) {
-//                    poker4[i] = poker[i];
-//                }
-//            }
-//            for (int i = 0; i < poker5.length; i++) {
-//                if (poker[i].returnHandType() == 5) {
-//                    poker5[i] = poker[i];
-//                }
-//            }
-//            for (int i = 0; i < poker6.length; i++) {
-//                if (poker[i].returnHandType() == 6) {
-//                    poker6[i] = poker[i];
-//                }
-//            }
-//            for (int i = 0; i < poker7.length; i++) {
-//                if (poker[i].returnHandType() == 7) {
-//                    poker7[i] = poker[i];
-//                }
-//            }
-//        }
-//        System.out.println(handTypeOneCount);
-//        System.out.println(Arrays.toString(poker1));
-//        System.out.println(Arrays.toString(poker2));
-//        System.out.println(Arrays.toString(poker3));
-//        System.out.println(Arrays.toString(poker4));
-//        System.out.println(Arrays.toString(poker5));
-//        System.out.println(Arrays.toString(poker6));
-//        System.out.println(Arrays.toString(poker7));
-//        for (int y = 0; y <poker.length-1; y++){
-//            int currentRank=poker[y+1].returnHandType();
-//            if (currentRank<(poker[y].returnHandType()));{
-//                poker[y].rank=numOfLines;
+        for (Hand hand : poker) {
+            totalBid += hand.returnRank() * hand.returnBid();
+        }
 
-
-//          firstHand.determineRank(numOfLines);
-//            System.out.println(firstHand.toString());
+        System.out.println("Five of a kind:" +fiveOfAKind);
+        System.out.println("Four of a kind: "+fourOfAKind);
+        System.out.println("Full House: "+fullHouse);
+        System.out.println("Three of a kind: "+threeOfAKind);
+        System.out.println("Double Pair: "+ doublePair);
+        System.out.println("Single Pair: "+singlePair);
+        System.out.println("High Card: "+highCard);
+        System.out.println("Total Bud: :"+totalBid);
     }
-//    System.out.println("Five of a kind:" +fiveOfAKind);
-//    System.out.println("Four of a kind: "+fourOfAKind);
-//    System.out.println("Full House: "+fullHouse);
-//    System.out.println("Three of a kind: "+threeOfAKind);
-//    System.out.println("Double Pair: "+ doublePair);
-//    System.out.println("Single Pair: "+singlePair);
-//    System.out.println("High Card: "+highCard);
 }
-//        System.out.println(Arrays.toString(poker));
-
-
-

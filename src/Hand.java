@@ -1,4 +1,6 @@
 
+
+
 public class Hand {
     public int rank;
     private int bidValue;
@@ -9,10 +11,15 @@ public class Hand {
     private int fourthCard;
     private int fifthCard;
 
-    public Hand(int bidValue, int count, int firstCard) {
+    public Hand(int bidValue, int count, int firstCard, int secondCard, int thirdCard, int fourthCard, int fifthCard) {
 
         this.bidValue = bidValue;
         this.handType = determineHandType(count);
+        this.firstCard=firstCard;
+        this.secondCard=secondCard;
+        this.thirdCard=thirdCard;
+        this.fourthCard=fourthCard;
+        this.fifthCard=fifthCard;
     }
 
     public String toString() {
@@ -51,25 +58,30 @@ public class Hand {
     //    public void setRank()){
 //        rank=highestNumber;
 //    }
-    public void determineRank(int highestRank) {
-        rank = highestRank;
+    public void setRank(int rank) {
+        this.rank=rank;
+    }
+    public int returnRank(){
+        return rank;
+    }
+    public int returnBid(){
+        return bidValue;
     }
 
-    public void setFirstCard(int firstCard) {
-        this.firstCard = firstCard;
+
+    public int returnFirstCard() {
+        return firstCard;
     }
-    public void setSecondCard(int secondCard) {
-        this.secondCard = secondCard;
+    public int returnSecondCard() {
+        return secondCard;
     }
-    public void setThirdCard(int thirdCard){
-        this.thirdCard=thirdCard;
+    public int returnThirdCard(){
+        return thirdCard;
     }
-    public void setFourthCard(int fourthCard){
-        this.fourthCard=fourthCard;
+    public int returnFourthCard(){
+        return fourthCard;
     }
-    public void setFifthCard(int fifthCard){
-        this.fifthCard=fifthCard;
+    public int returnFifthCard(){
+        return fifthCard;
     }
 }
-
-
