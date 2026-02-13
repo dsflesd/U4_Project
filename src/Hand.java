@@ -54,10 +54,6 @@ public class Hand {
     public int returnHandType() {
         return handType;
     }
-
-    //    public void setRank()){
-//        rank=highestNumber;
-//    }
     public void setRank(int rank) {
         this.rank=rank;
     }
@@ -67,7 +63,6 @@ public class Hand {
     public int returnBid(){
         return bidValue;
     }
-
 
     public int returnFirstCard() {
         return firstCard;
